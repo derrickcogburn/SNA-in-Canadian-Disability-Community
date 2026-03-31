@@ -1,0 +1,49 @@
+# R session files
+.RData
+.Rhistory
+.Rproj.user/
+
+# R environment
+.Renviron
+.Rprofile
+
+# Compiled R files
+*.Rcheck/
+*.dll
+*.o
+*.so
+
+# R package build artifacts
+*.tar.gz
+*.Rcheck/
+
+# Quarto / R Markdown
+*_cache/
+*_files/
+*.knit.md
+*.utf8.md
+.quarto/
+
+# Rendered output (uncomment if you don't want these tracked)
+# *.html
+# *.pdf
+# *.docx
+
+# Data files (uncomment or adjust as needed)
+# *.csv
+# *.xlsx
+# *.rds
+# *.rda
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Positron / VS Code
+.vscode/
+*.code-workspace
+
+# Environment and credentials
+.env
+*.pem
+*.key
