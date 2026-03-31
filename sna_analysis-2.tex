@@ -1,0 +1,1021 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{xurl} % break long URLs
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{fvextra} % better verbatim handling (no Highlighting redefinition)
+\usepackage{booktabs} % professional table rules
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Social Network Analysis of the Canadian Disability Rights Community},
+  pdfauthor={Dr.~Derrick L. Cogburn},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Social Network Analysis of the Canadian Disability Rights
+Community}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Mapping Collaboration Networks and Key Actors in Disability
+Rights Advocacy}
+\author{Dr.~Derrick L. Cogburn}
+\date{2026-03-28}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\section{Executive Summary}\label{executive-summary}
+
+This report presents a Social Network Analysis (SNA) of collaboration
+patterns within the Canadian disability rights community, based on a
+bilingual survey (English/French). The survey, called ``Enquête
+d'analyse des Réseaux Sociaux / Social Network Analysis Survey'' enables
+an analysis and mapping of who collaborates with whom, identifies the
+most central actors and organizations, detects community clusters, and
+assesses overall network structure.
+
+\section{Data Cleaning and Pipeline}\label{data-cleaning-and-pipeline}
+
+\subsection{Source Data}\label{source-data}
+
+The raw data was collected via a bilingual (English/French) Microsoft
+Forms survey distributed to members of the Canadian disability rights
+community. The survey instrument contained 51 columns across a single
+worksheet, with parallel English and French versions of each question. A
+total of 111 responses were recorded. The raw data file was
+de-identified prior to analysis.
+
+\subsection{Survey Structure and Key
+Fields}\label{survey-structure-and-key-fields}
+
+The survey captured several categories of information relevant to social
+network analysis. Respondent attributes included the respondent's
+connection to the disability community (e.g., person with a disability,
+family member/caregiver, advocate, researcher, health professional) and
+the disability rights issues in which they are most actively involved
+(free-text responses covering topics such as employment, children/youth,
+housing, poverty, and accessibility). Collaboration data included the
+names of up to three organizations or individuals with whom the
+respondent has partnered in the past five years (free-text), the
+frequency of collaboration with each named partner (regularly,
+occasionally, or seldom), and whether the respondent's named partners
+are linked to each other.
+
+\subsection{Data Cleaning Steps}\label{data-cleaning-steps}
+
+The cleaning pipeline proceeded through several stages. First, the
+metadata row generated by Microsoft Forms was removed, and the language
+preference field was used to route each respondent to the appropriate
+English or French column for each question. Second, the bilingual fields
+were consolidated, with the French-language response used when the
+respondent selected French and the English-language response used
+otherwise. This produced a unified respondent table with consistent
+column names regardless of survey language.
+
+Third, connection types were standardized into nine categories: Person
+with Disability, Advocate/CSO, Family/Caregiver, Researcher, Health,
+Education, Leisure, Government/Policy, and Other. Respondents whose
+connection type text matched multiple categories were assigned all
+applicable categories (semicolon-separated), with the first match
+designated as the primary connection type.
+
+Fourth, disability rights issue areas were categorized from the
+free-text responses into 12 standardized topics: Children/Youth,
+Employment, Accessibility/Inclusion, Poverty/Income, Rights/Policy,
+Education, Housing, Health, Indigenous, Transportation, Technology, and
+Other. As with connection types, respondents active in multiple areas
+received all applicable categories.
+
+Fifth, the free-text partner names were parsed into individual
+organization or person names. The parser handled several formats
+including comma-separated lists, semicolon-separated lists, numbered
+lists, and narrative descriptions. Each respondent contributed up to
+three partner names. Names were then normalized by converting to
+lowercase, collapsing whitespace, and removing punctuation. A
+prefix-matching algorithm was applied to merge near-duplicate entries
+(e.g., variant spellings or abbreviations of the same organization).
+This best-effort automated cleaning reduced the number of unique partner
+names from 175 to 166.
+
+Sixth, collaboration frequency values were harmonized across languages,
+mapping both English terms (Regularly, Occasionally, Seldom) and their
+French equivalents (Régulièrement, Occasionnellement, Rarement) to a
+common three-level scale plus an Unknown category for non-standard
+responses.
+
+\subsection{Output Files}\label{output-files}
+
+The pipeline produced two analysis-ready CSV files. The node table
+(\texttt{respondents\_final.csv}) contains one row per respondent with
+fields for respondent ID, language, raw and categorized connection type,
+raw and categorized issue areas, and primary connection and issue
+assignments. The edge table (\texttt{edges\_final.csv}) contains one row
+per respondent-partner tie with fields for respondent ID, raw partner
+name, normalized partner name, cleaned canonical partner name, raw
+frequency, and harmonized frequency.
+
+\section{Setup}\label{setup}
+
+\subsection{Install Required Packages}\label{install-required-packages}
+
+Run this chunk once to install all dependencies. After installation, you
+can set \texttt{eval:\ false} or simply skip it on future renders.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}
+  \StringTok{"tidyverse"}\NormalTok{,      }\CommentTok{\# Data wrangling and ggplot2}
+  \StringTok{"igraph"}\NormalTok{,         }\CommentTok{\# Core network analysis}
+  \StringTok{"tidygraph"}\NormalTok{,      }\CommentTok{\# Tidy interface to igraph}
+  \StringTok{"ggraph"}\NormalTok{,         }\CommentTok{\# Network visualisation (ggplot2{-}based)}
+  \StringTok{"readxl"}\NormalTok{,         }\CommentTok{\# Read .xlsx files}
+  \StringTok{"patchwork"}\NormalTok{,      }\CommentTok{\# Combine ggplot panels}
+  \StringTok{"scales"}\NormalTok{,         }\CommentTok{\# Axis formatting}
+  \StringTok{"RColorBrewer"}\NormalTok{,   }\CommentTok{\# Colour palettes}
+  \StringTok{"knitr"}\NormalTok{,          }\CommentTok{\# Tables in Quarto}
+  \StringTok{"kableExtra"}      \CommentTok{\# Styled tables}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Load Libraries}\label{load-libraries}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(igraph)}
+\FunctionTok{library}\NormalTok{(tidygraph)}
+\FunctionTok{library}\NormalTok{(ggraph)}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+\FunctionTok{library}\NormalTok{(scales)}
+\FunctionTok{library}\NormalTok{(RColorBrewer)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{))}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Import Data}\label{import-data}
+
+The analysis uses two pre-cleaned CSV files produced by Dr.~Cogburn in a
+data-preparation pipeline. These files, \texttt{respondents\_final.csv}
+and \texttt{edges\_final.csv} are located in the data folder, which is
+located in the same directory as this \texttt{.qmd} file. Paths to the
+data should be updated to data/filename.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ── Node table: one row per survey respondent ──}
+\NormalTok{respondents }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/respondents\_final.csv"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \CommentTok{\# Drop the metadata row carried over from MS Forms}
+\FunctionTok{filter}\NormalTok{(resp\_id }\SpecialCharTok{!=} \StringTok{"RMicrosoft Forms "}\NormalTok{)}
+
+\CommentTok{\# ── Edge table: one row per respondent → partner tie ──}
+\NormalTok{edges }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/edges\_final.csv"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(}
+    \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(partner\_clean),}
+\NormalTok{    partner\_clean }\SpecialCharTok{!=} \StringTok{"nan"}\NormalTok{,}
+\NormalTok{    partner\_clean }\SpecialCharTok{!=} \StringTok{"None"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}
+  \StringTok{"Respondents:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(respondents), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \StringTok{"Respondents who named partners:"}\NormalTok{, }\FunctionTok{n\_distinct}\NormalTok{(edges}\SpecialCharTok{$}\NormalTok{respondent), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \StringTok{"Unique organisations named:"}\NormalTok{, }\FunctionTok{n\_distinct}\NormalTok{(edges}\SpecialCharTok{$}\NormalTok{partner\_clean), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \StringTok{"Total collaboration ties:"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(edges), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Respondents: 111 
+ Respondents who named partners: 57 
+ Unique organisations named: 166 
+ Total collaboration ties: 182 
+\end{verbatim}
+
+\subsection{Colour Palettes}\label{colour-palettes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Connection{-}type palette (respondent node colouring)}
+\NormalTok{conn\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Person with Disability"} \OtherTok{=} \StringTok{"\#E63946"}\NormalTok{,}
+  \StringTok{"Advocate/CSO"}           \OtherTok{=} \StringTok{"\#457B9D"}\NormalTok{,}
+  \StringTok{"Family/Caregiver"}       \OtherTok{=} \StringTok{"\#2A9D8F"}\NormalTok{,}
+  \StringTok{"Researcher"}             \OtherTok{=} \StringTok{"\#6A4C93"}\NormalTok{,}
+  \StringTok{"Health"}                 \OtherTok{=} \StringTok{"\#BC4749"}\NormalTok{,}
+  \StringTok{"Education"}              \OtherTok{=} \StringTok{"\#F4A261"}\NormalTok{,}
+  \StringTok{"Leisure"}                \OtherTok{=} \StringTok{"\#8AC926"}\NormalTok{,}
+  \StringTok{"Government/Policy"}      \OtherTok{=} \StringTok{"\#264653"}\NormalTok{,}
+  \StringTok{"Other"}                  \OtherTok{=} \StringTok{"\#AAAAAA"}\NormalTok{,}
+  \StringTok{"Unknown"}                \OtherTok{=} \StringTok{"\#BBBBBB"}
+\NormalTok{)}
+
+\CommentTok{\# Issue{-}area palette (bipartite squares)}
+\NormalTok{issue\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Children/Youth"}          \OtherTok{=} \StringTok{"\#E63946"}\NormalTok{,}
+  \StringTok{"Employment"}              \OtherTok{=} \StringTok{"\#457B9D"}\NormalTok{,}
+  \StringTok{"Accessibility/Inclusion"} \OtherTok{=} \StringTok{"\#2A9D8F"}\NormalTok{,}
+  \StringTok{"Poverty/Income"}          \OtherTok{=} \StringTok{"\#E9C46A"}\NormalTok{,}
+  \StringTok{"Rights/Policy"}           \OtherTok{=} \StringTok{"\#264653"}\NormalTok{,}
+  \StringTok{"Education"}               \OtherTok{=} \StringTok{"\#F4A261"}\NormalTok{,}
+  \StringTok{"Housing"}                 \OtherTok{=} \StringTok{"\#606C38"}\NormalTok{,}
+  \StringTok{"Health"}                  \OtherTok{=} \StringTok{"\#BC4749"}\NormalTok{,}
+  \StringTok{"Indigenous"}              \OtherTok{=} \StringTok{"\#6A4C93"}\NormalTok{,}
+  \StringTok{"Transportation"}          \OtherTok{=} \StringTok{"\#1982C4"}\NormalTok{,}
+  \StringTok{"Technology"}              \OtherTok{=} \StringTok{"\#8AC926"}\NormalTok{,}
+  \StringTok{"Other"}                   \OtherTok{=} \StringTok{"\#AAAAAA"}
+\NormalTok{)}
+
+\CommentTok{\# Collaboration{-}frequency palette}
+\NormalTok{freq\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Regularly"}    \OtherTok{=} \StringTok{"\#E63946"}\NormalTok{,}
+  \StringTok{"Occasionally"} \OtherTok{=} \StringTok{"\#E9C46A"}\NormalTok{,}
+  \StringTok{"Seldom"}       \OtherTok{=} \StringTok{"\#457B9D"}\NormalTok{,}
+  \StringTok{"Unknown"}      \OtherTok{=} \StringTok{"\#BBBBBB"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Two-Mode Bipartite Network: Respondents × Issue
+Areas}\label{two-mode-bipartite-network-respondents-issue-areas}
+
+This network maps respondents (circles) to the disability rights issue
+areas they are most actively involved in (squares). Respondents are
+coloured by their connection type to the disability community;
+issue-area nodes are sized by the number of affiliated respondents.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Expand the semicolon{-}separated issue\_category into long form}
+\NormalTok{bip\_edges }\OtherTok{\textless{}{-}}\NormalTok{ respondents }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(}
+    \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(issue\_category),}
+\NormalTok{    issue\_category }\SpecialCharTok{!=} \StringTok{"Unknown"}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{separate\_rows}\NormalTok{(issue\_category, }\AttributeTok{sep =} \StringTok{";"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{issue\_category =} \FunctionTok{str\_trim}\NormalTok{(issue\_category)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(issue\_category }\SpecialCharTok{!=} \StringTok{""}\NormalTok{, issue\_category }\SpecialCharTok{!=} \StringTok{"Unknown"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(resp\_id, issue\_category)}
+
+\CommentTok{\# Build igraph bipartite}
+\NormalTok{bip\_graph }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_data\_frame}\NormalTok{(bip\_edges, }\AttributeTok{directed =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# Mark node type: TRUE = issue{-}area node, FALSE = respondent node}
+\FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{type }\OtherTok{\textless{}{-}} \FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{name }\SpecialCharTok{\%in\%} \FunctionTok{unique}\NormalTok{(bip\_edges}\SpecialCharTok{$}\NormalTok{issue\_category)}
+
+\CommentTok{\# Attach respondent attributes}
+\NormalTok{resp\_lookup }\OtherTok{\textless{}{-}}\NormalTok{ respondents }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(resp\_id, primary\_connection)}
+\FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{primary\_connection }\OtherTok{\textless{}{-}}\NormalTok{ resp\_lookup}\SpecialCharTok{$}\NormalTok{primary\_connection[}
+  \FunctionTok{match}\NormalTok{(}\FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{name, resp\_lookup}\SpecialCharTok{$}\NormalTok{resp\_id)}
+\NormalTok{]}
+\FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{primary\_connection[}\FunctionTok{is.na}\NormalTok{(}\FunctionTok{V}\NormalTok{(bip\_graph)}\SpecialCharTok{$}\NormalTok{primary\_connection)] }\OtherTok{\textless{}{-}} \StringTok{"Issue Area"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as\_tbl\_graph}\NormalTok{(bip\_graph) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{node\_type   =} \FunctionTok{ifelse}\NormalTok{(type, }\StringTok{"Issue Area"}\NormalTok{, }\StringTok{"Respondent"}\NormalTok{),}
+    \AttributeTok{node\_degree =} \FunctionTok{centrality\_degree}\NormalTok{(),}
+    \AttributeTok{node\_colour =} \FunctionTok{ifelse}\NormalTok{(type, }\StringTok{"Issue Area"}\NormalTok{, primary\_connection),}
+    \AttributeTok{node\_size   =} \FunctionTok{ifelse}\NormalTok{(type, node\_degree }\SpecialCharTok{*} \DecValTok{2} \SpecialCharTok{+} \DecValTok{4}\NormalTok{, node\_degree }\SpecialCharTok{+} \DecValTok{2}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggraph}\NormalTok{(}\AttributeTok{layout =} \StringTok{"fr"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_edge\_link}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.07}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#666666"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_point}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ node\_colour, }\AttributeTok{size =}\NormalTok{ node\_size, }\AttributeTok{shape =}\NormalTok{ node\_type),}
+    \AttributeTok{alpha =} \FloatTok{0.75}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_text}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{ifelse}\NormalTok{(type, name, }\ConstantTok{NA}\NormalTok{)),}
+    \AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{fontface =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{max.overlaps =} \DecValTok{20}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_shape\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Issue Area"} \OtherTok{=} \DecValTok{15}\NormalTok{, }\StringTok{"Respondent"} \OtherTok{=} \DecValTok{16}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(conn\_palette, }\StringTok{"Issue Area"} \OtherTok{=} \StringTok{"\#333333"}\NormalTok{),}
+    \AttributeTok{name   =} \StringTok{"Node Type"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_identity}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{shape =} \StringTok{"none"}\NormalTok{, }\AttributeTok{size =} \StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Bipartite Network: Respondents and Disability Rights Issue Areas"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{14}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{sna_analysis-2_files/figure-pdf/bipartite-plot-1.pdf}}
+
+}
+
+\caption{Figure 1. Two-mode bipartite network. Circles = respondents
+(coloured by connection type); squares = issue areas (sized by degree).}
+
+\end{figure}%
+
+\section{One-Mode Projected Network: Respondent
+Collaboration}\label{one-mode-projected-network-respondent-collaboration}
+
+Two respondents are linked in the projected network when they named the
+same organisation as a collaboration partner. Edge weight reflects the
+number of shared partners.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Build the respondent–organisation bipartite graph}
+\NormalTok{resp\_org\_edges }\OtherTok{\textless{}{-}}\NormalTok{ edges }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(respondent, partner\_clean) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{distinct}\NormalTok{()}
+
+\NormalTok{bip\_ro }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_data\_frame}\NormalTok{(resp\_org\_edges, }\AttributeTok{directed =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{V}\NormalTok{(bip\_ro)}\SpecialCharTok{$}\NormalTok{type }\OtherTok{\textless{}{-}} \SpecialCharTok{!}\NormalTok{(}\FunctionTok{V}\NormalTok{(bip\_ro)}\SpecialCharTok{$}\NormalTok{name }\SpecialCharTok{\%in\%} \FunctionTok{unique}\NormalTok{(resp\_org\_edges}\SpecialCharTok{$}\NormalTok{respondent))}
+
+\CommentTok{\# Project onto respondent mode}
+\NormalTok{proj }\OtherTok{\textless{}{-}} \FunctionTok{bipartite\_projection}\NormalTok{(bip\_ro, }\AttributeTok{which =} \StringTok{"false"}\NormalTok{)}
+
+\CommentTok{\# Attach respondent attributes}
+\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_connection }\OtherTok{\textless{}{-}}\NormalTok{ resp\_lookup}\SpecialCharTok{$}\NormalTok{primary\_connection[}
+  \FunctionTok{match}\NormalTok{(}\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{name, resp\_lookup}\SpecialCharTok{$}\NormalTok{resp\_id)}
+\NormalTok{]}
+\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_connection[}\FunctionTok{is.na}\NormalTok{(}\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_connection)] }\OtherTok{\textless{}{-}} \StringTok{"Unknown"}
+
+\NormalTok{issue\_lookup }\OtherTok{\textless{}{-}}\NormalTok{ respondents }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(resp\_id, primary\_issue)}
+\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_issue }\OtherTok{\textless{}{-}}\NormalTok{ issue\_lookup}\SpecialCharTok{$}\NormalTok{primary\_issue[}
+  \FunctionTok{match}\NormalTok{(}\FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{name, issue\_lookup}\SpecialCharTok{$}\NormalTok{resp\_id)}
+\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as\_tbl\_graph}\NormalTok{(proj) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{deg =} \FunctionTok{centrality\_degree}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggraph}\NormalTok{(}\AttributeTok{layout =} \StringTok{"fr"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_edge\_link}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{width =}\NormalTok{ weight),}
+    \AttributeTok{alpha =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#999999"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_point}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ primary\_connection, }\AttributeTok{size =}\NormalTok{ deg),}
+    \AttributeTok{alpha =} \FloatTok{0.8}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_text}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{ifelse}\NormalTok{(deg }\SpecialCharTok{\textgreater{}=} \DecValTok{2}\NormalTok{, name, }\ConstantTok{NA}\NormalTok{)),}
+    \AttributeTok{size =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{max.overlaps =} \DecValTok{15}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_edge\_width}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{name =} \StringTok{"Shared Partners"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ conn\_palette, }\AttributeTok{name =} \StringTok{"Connection Type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_continuous}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{), }\AttributeTok{name =} \StringTok{"Degree"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Projected Network: Respondents Linked by Shared Collaboration Partners"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{14}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{sna_analysis-2_files/figure-pdf/projected-plot-1.pdf}}
+
+}
+
+\caption{Figure 2. One-mode projected network. Node size = degree;
+colour = connection type; edge width = number of shared partners.}
+
+\end{figure}%
+
+\subsection{Network Structure Metrics}\label{network-structure-metrics}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{metrics\_tbl }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{Metric =} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Nodes (respondents with ties)"}\NormalTok{,}
+    \StringTok{"Edges (shared{-}partner links)"}\NormalTok{,}
+    \StringTok{"Density"}\NormalTok{,}
+    \StringTok{"Connected components"}\NormalTok{,}
+    \StringTok{"Transitivity (global clustering)"}\NormalTok{,}
+    \StringTok{"Average clustering coefficient"}\NormalTok{,}
+    \StringTok{"Largest component size"}
+\NormalTok{  ),}
+  \AttributeTok{Value =} \FunctionTok{c}\NormalTok{(}
+    \FunctionTok{vcount}\NormalTok{(proj),}
+    \FunctionTok{ecount}\NormalTok{(proj),}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{graph.density}\NormalTok{(proj), }\DecValTok{4}\NormalTok{),}
+    \FunctionTok{components}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{no,}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{transitivity}\NormalTok{(proj, }\AttributeTok{type =} \StringTok{"global"}\NormalTok{), }\DecValTok{4}\NormalTok{),}
+    \FunctionTok{round}\NormalTok{(}\FunctionTok{transitivity}\NormalTok{(proj, }\AttributeTok{type =} \StringTok{"average"}\NormalTok{), }\DecValTok{4}\NormalTok{),}
+    \FunctionTok{max}\NormalTok{(}\FunctionTok{components}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{csize)}
+\NormalTok{  )}
+\NormalTok{)}
+
+\NormalTok{metrics\_tbl }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable}\NormalTok{(}\AttributeTok{align =} \FunctionTok{c}\NormalTok{(}\StringTok{"l"}\NormalTok{, }\StringTok{"r"}\NormalTok{), }\AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable\_styling}\NormalTok{(}
+    \AttributeTok{bootstrap\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hover"}\NormalTok{),}
+    \AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"hold\_position"}\NormalTok{),}
+    \AttributeTok{full\_width =} \ConstantTok{FALSE}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}[t]{lr}
+\toprule
+Metric & Value\\
+\midrule
+Nodes (respondents with ties) & 57.0000\\
+Edges (shared-partner links) & 17.0000\\
+Density & 0.0107\\
+Connected components & 46.0000\\
+Transitivity (global clustering) & 0.4773\\
+\addlinespace
+Average clustering coefficient & 0.8116\\
+Largest component size & 10.0000\\
+\bottomrule
+\end{longtable*}
+
+\section{Centrality Analysis}\label{centrality-analysis}
+
+Centrality measures identify the most influential actors. \textbf{Degree
+centrality} counts direct connections; \textbf{betweenness centrality}
+identifies actors who bridge otherwise disconnected parts of the
+network.
+
+\subsection{Organisation Degree
+Centrality}\label{organisation-degree-centrality}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{org\_degree }\OtherTok{\textless{}{-}}\NormalTok{ edges }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{count}\NormalTok{(partner\_clean, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{name =} \StringTok{"degree"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{15}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(org\_degree, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(partner\_clean, degree), }\AttributeTok{y =}\NormalTok{ degree)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"\#457B9D"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.85}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ degree), }\AttributeTok{hjust =} \SpecialCharTok{{-}}\FloatTok{0.3}\NormalTok{, }\AttributeTok{size =} \FloatTok{3.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \ConstantTok{NULL}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Degree (respondents naming this organisation)"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Organisation Degree Centrality"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{sna_analysis-2_files/figure-pdf/org-degree-1.pdf}}
+
+}
+
+\caption{Figure 3a. The 15 most frequently named collaboration
+partners.}
+
+\end{figure}%
+
+\subsection{Respondent Centrality (Projected
+Network)}\label{respondent-centrality-projected-network}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute centrality measures}
+\NormalTok{cent\_df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{name              =} \FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{name,}
+  \AttributeTok{primary\_connection =} \FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_connection,}
+  \AttributeTok{degree            =} \FunctionTok{degree}\NormalTok{(proj),}
+  \AttributeTok{betweenness       =} \FunctionTok{betweenness}\NormalTok{(proj, }\AttributeTok{weights =} \FunctionTok{E}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{weight)}
+\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(degree))}
+
+\CommentTok{\# Degree panel}
+\NormalTok{p\_deg }\OtherTok{\textless{}{-}}\NormalTok{ cent\_df }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{12}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(name, }\StringTok{" ("}\NormalTok{, }\FunctionTok{str\_sub}\NormalTok{(primary\_connection, }\DecValTok{1}\NormalTok{, }\DecValTok{12}\NormalTok{), }\StringTok{")"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(label, degree), }\AttributeTok{y =}\NormalTok{ degree, }\AttributeTok{fill =}\NormalTok{ primary\_connection)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.85}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ conn\_palette) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \StringTok{"Degree"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Respondent Degree Centrality"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{)}
+\NormalTok{  )}
+
+\CommentTok{\# Betweenness panel}
+\NormalTok{p\_betw }\OtherTok{\textless{}{-}}\NormalTok{ cent\_df }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(betweenness)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{12}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(name, }\StringTok{" ("}\NormalTok{, }\FunctionTok{str\_sub}\NormalTok{(primary\_connection, }\DecValTok{1}\NormalTok{, }\DecValTok{12}\NormalTok{), }\StringTok{")"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(label, betweenness), }\AttributeTok{y =}\NormalTok{ betweenness, }\AttributeTok{fill =}\NormalTok{ primary\_connection)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.85}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ conn\_palette) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \StringTok{"Betweenness"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Respondent Betweenness Centrality"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{p\_deg }\SpecialCharTok{+}\NormalTok{ p\_betw }\SpecialCharTok{+}
+  \FunctionTok{plot\_annotation}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Centrality Analysis: Key Actors in the Projected Network"}\NormalTok{,}
+    \AttributeTok{theme =} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{14}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{sna_analysis-2_files/figure-pdf/respondent-centrality-1.pdf}
+
+}
+
+\caption{Figure 3b. Respondent degree and betweenness centrality in the
+projected network.}
+
+\end{figure}%
+
+\section{Community Detection}\label{community-detection}
+
+The Louvain algorithm partitions the network into communities that
+maximise modularity --- groups of respondents who are more densely
+connected to each other than to the rest of the network.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comms }\OtherTok{\textless{}{-}} \FunctionTok{cluster\_louvain}\NormalTok{(proj, }\AttributeTok{weights =} \FunctionTok{E}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{weight)}
+
+\CommentTok{\# Summary stats}
+\NormalTok{n\_comms    }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(}\FunctionTok{membership}\NormalTok{(comms)))}
+\NormalTok{mod\_score  }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{modularity}\NormalTok{(comms), }\DecValTok{4}\NormalTok{)}
+\NormalTok{comm\_sizes }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\FunctionTok{membership}\NormalTok{(comms)), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}
+  \StringTok{"Communities detected:"}\NormalTok{, n\_comms, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \StringTok{"Modularity:"}\NormalTok{, mod\_score, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \StringTok{"Sizes:"}\NormalTok{, }\FunctionTok{paste}\NormalTok{(comm\_sizes, }\AttributeTok{collapse =} \StringTok{", "}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Communities detected: 47 
+ Modularity: 0.3387 
+ Sizes: 7, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as\_tbl\_graph}\NormalTok{(proj) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{community =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{membership}\NormalTok{(comms)),}
+    \AttributeTok{deg       =} \FunctionTok{centrality\_degree}\NormalTok{()}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggraph}\NormalTok{(}\AttributeTok{layout =} \StringTok{"fr"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_edge\_link}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.15}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#BBBBBB"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_point}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ community, }\AttributeTok{size =}\NormalTok{ deg),}
+    \AttributeTok{alpha =} \FloatTok{0.85}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_node\_text}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{ifelse}\NormalTok{(deg }\SpecialCharTok{\textgreater{}=} \DecValTok{2}\NormalTok{, name, }\ConstantTok{NA}\NormalTok{)),}
+    \AttributeTok{size =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{repel =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{max.overlaps =} \DecValTok{15}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_continuous}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{), }\AttributeTok{name =} \StringTok{"Degree"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title   =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Community Detection (Louvain): "}\NormalTok{, n\_comms, }\StringTok{" Communities"}\NormalTok{),}
+    \AttributeTok{subtitle =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Modularity = "}\NormalTok{, mod\_score),}
+    \AttributeTok{colour  =} \StringTok{"Community"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{plot.title    =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{plot.subtitle =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{11}\NormalTok{, }\AttributeTok{colour =} \StringTok{"grey40"}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{sna_analysis-2_files/figure-pdf/community-plot-1.pdf}}
+
+}
+
+\caption{Figure 4. Louvain communities. Colour = community membership;
+size = degree.}
+
+\end{figure}%
+
+\subsection{Community Composition}\label{community-composition}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Build composition summary for multi{-}member communities}
+\NormalTok{comm\_membership }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{name              =} \FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{name,}
+  \AttributeTok{primary\_connection =} \FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_connection,}
+  \AttributeTok{primary\_issue     =} \FunctionTok{V}\NormalTok{(proj)}\SpecialCharTok{$}\NormalTok{primary\_issue,}
+  \AttributeTok{community         =} \FunctionTok{membership}\NormalTok{(comms)}
+\NormalTok{)}
+
+\NormalTok{comm\_summary }\OtherTok{\textless{}{-}}\NormalTok{ comm\_membership }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(community) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{Size =} \FunctionTok{n}\NormalTok{(),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Connection Types}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{paste}\NormalTok{(}
+      \FunctionTok{names}\NormalTok{(}\FunctionTok{sort}\NormalTok{(}\FunctionTok{table}\NormalTok{(primary\_connection), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{min}\NormalTok{(}\DecValTok{3}\NormalTok{, }\FunctionTok{n}\NormalTok{())]),}
+      \AttributeTok{collapse =} \StringTok{", "}
+\NormalTok{    ),}
+    \StringTok{\textasciigrave{}}\AttributeTok{Issue Areas}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{paste}\NormalTok{(}
+      \FunctionTok{names}\NormalTok{(}\FunctionTok{sort}\NormalTok{(}\FunctionTok{table}\NormalTok{(primary\_issue), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{min}\NormalTok{(}\DecValTok{3}\NormalTok{, }\FunctionTok{n}\NormalTok{())]),}
+      \AttributeTok{collapse =} \StringTok{", "}
+\NormalTok{    ),}
+    \AttributeTok{.groups =} \StringTok{"drop"}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(Size }\SpecialCharTok{\textgreater{}=} \DecValTok{2}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Size)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Community =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Community "}\NormalTok{, }\FunctionTok{row\_number}\NormalTok{())) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(Community, Size, }\StringTok{\textasciigrave{}}\AttributeTok{Connection Types}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Issue Areas}\StringTok{\textasciigrave{}}\NormalTok{)}
+
+\NormalTok{comm\_summary }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable}\NormalTok{(}\AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable\_styling}\NormalTok{(}
+    \AttributeTok{bootstrap\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hover"}\NormalTok{),}
+    \AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"hold\_position"}\NormalTok{, }\StringTok{"scale\_down"}\NormalTok{),}
+    \AttributeTok{full\_width =} \ConstantTok{FALSE}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}[t]{lrll}
+\toprule
+Community & Size & Connection Types & Issue Areas\\
+\midrule
+Community 1 & 7 & Person with Disability, Health, NA & Children/Youth, Employment, Housing\\
+Community 2 & 3 & Person with Disability, NA, NA & Employment, Housing, Other\\
+Community 3 & 2 & Person with Disability, NA & Employment, Poverty/Income\\
+Community 4 & 2 & Person with Disability, NA & Children/Youth, NA\\
+\bottomrule
+\end{longtable*}
+
+\section{Degree Distributions and Collaboration
+Patterns}\label{degree-distributions-and-collaboration-patterns}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Organisation degree distribution}
+\NormalTok{p1 }\OtherTok{\textless{}{-}}\NormalTok{ edges }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{count}\NormalTok{(partner\_clean, }\AttributeTok{name =} \StringTok{"degree"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ degree)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}
+    \AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#457B9D"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{,}
+    \AttributeTok{colour =} \StringTok{"white"}\NormalTok{, }\AttributeTok{boundary =} \FloatTok{0.5}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{mean}\NormalTok{(degree)),}
+    \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#E63946"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Degree"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Organisation Degree Distribution"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{))}
+
+\CommentTok{\# Respondent degree distribution (projected network)}
+\NormalTok{resp\_deg\_df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{degree =} \FunctionTok{degree}\NormalTok{(proj))}
+
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(resp\_deg\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ degree)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}
+    \AttributeTok{binwidth =} \DecValTok{1}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#2A9D8F"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{,}
+    \AttributeTok{colour =} \StringTok{"white"}\NormalTok{, }\AttributeTok{boundary =} \SpecialCharTok{{-}}\FloatTok{0.5}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{mean}\NormalTok{(degree)),}
+    \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{colour =} \StringTok{"\#E63946"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Degree"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Respondent Degree Distribution}\SpecialCharTok{\textbackslash{}n}\StringTok{(Projected Network)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{))}
+
+\CommentTok{\# Collaboration frequency}
+\NormalTok{p3 }\OtherTok{\textless{}{-}}\NormalTok{ edges }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(freq\_clean }\SpecialCharTok{!=} \StringTok{"Unknown"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{count}\NormalTok{(freq\_clean) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ freq\_clean, }\AttributeTok{y =}\NormalTok{ n, }\AttributeTok{fill =}\NormalTok{ freq\_clean)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.85}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ n), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{fontface =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \FloatTok{3.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ freq\_palette) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Collaboration Frequency"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p2 }\SpecialCharTok{+}\NormalTok{ p3 }\SpecialCharTok{+}
+  \FunctionTok{plot\_annotation}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Network Structure: Degree Distributions and Collaboration Patterns"}\NormalTok{,}
+    \AttributeTok{theme =} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{size =} \DecValTok{14}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{sna_analysis-2_files/figure-pdf/degree-distributions-1.pdf}
+
+}
+
+\caption{Figure 5. Left: Organisation degree distribution. Centre:
+Respondent degree distribution (projected). Right: Collaboration
+frequency.}
+
+\end{figure}%
+
+\section{Discussion and Implications}\label{discussion-and-implications}
+
+The Canadian disability rights community operates as a \textbf{highly
+decentralized network}. Collaboration is predominantly local and
+issue-specific rather than nationally integrated. A small number of
+national organizations serve as critical connectors whose capacity to
+convene and bridge across issue silos is disproportionately important to
+overall network cohesion.
+
+\subsection{Fragmentation as a structural
+feature}\label{fragmentation-as-a-structural-feature}
+
+The Canadian disability rights community, as captured by this survey,
+operates as a highly decentralised network. Collaboration is
+predominantly local and issue-specific rather than nationally
+integrated. This is not necessarily a weakness --- it may reflect the
+diversity of disability issues and the importance of place-based
+advocacy --- but it does mean that information, resources, and strategic
+coordination may not flow easily across the network.
+
+\subsection{The role of national
+organisations}\label{the-role-of-national-organisations}
+
+A small number of national organisations (Disability Without Poverty,
+CNIB, March of Dimes, Inclusion Canada) serve as critical connectors.
+These organisations' capacity to convene, share information, and bridge
+across issue silos is disproportionately important to overall network
+cohesion. Strengthening these hub organisations --- or creating new ones
+--- could substantially improve coordination across the community.
+
+\subsection{Bridging actors}\label{bridging-actors}
+
+Respondents with high betweenness centrality are structurally important:
+they connect otherwise isolated parts of the network. Supporting and
+amplifying these bridging actors --- many of whom are persons with
+disabilities themselves --- could enhance cross-pollination of ideas and
+strategies.
+
+\subsection{Limitations}\label{limitations}
+
+This analysis is based on a convenience sample of 111 respondents. The
+free-text partner naming format means some organisations may be
+inconsistently recorded. The projected one-mode network relies on the
+assumption that shared organisational partnerships indicate a meaningful
+indirect connection between respondents. Finally, the survey captures
+reported collaboration, which may differ from actual interaction
+patterns.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Report generated from the Enquête d'analyse des Réseaux Sociaux /
+Social Network Analysis Survey. Analysis performed in R using igraph,
+tidygraph, and ggraph. All respondent identifiers are de-identified
+survey IDs.}
+
+
+
+
+\end{document}

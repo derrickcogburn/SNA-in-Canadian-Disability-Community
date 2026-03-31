@@ -1,0 +1,239 @@
+---
+title: "Social Network Analysis of the Canadian Disability Rights Community"
+subtitle: "Mapping Collaboration Networks and Key Actors in Disability Rights Advocacy"
+author: "Dr. Derrick L. Cogburn"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    fig-width: 12
+    fig-height: 8
+    embed-resources: true
+  pdf:
+    pdf-engine: lualatex
+    keep-tex: true
+    titlepage: true
+    toc: true
+    toc-depth: 2
+    code-block-wrap: true
+    number-sections: true
+    include-in-header:
+      text: |
+        \usepackage{xurl} % break long URLs
+        \PassOptionsToPackage{hyphens}{url}
+        \usepackage{fvextra} % better verbatim handling (no Highlighting redefinition)
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Setup
+
+## Install Required Packages
+
+Run this chunk once to install all dependencies. After installation, you can set
+`eval: false` or simply skip it on future renders.
+
+```{r install-packages}
+#| eval: false
+
+install.packages(c(
+  "tidyverse",      # Data wrangling and ggplot2
+
+"igraph",          # Core network analysis
+  "tidygraph",      # Tidy interface to igraph
+  "ggraph",         # Network visualisation (ggplot2-based)
+  "readxl",         # Read .xlsx files
+  "patchwork",      # Combine ggplot panels
+  "scales",         # Axis formatting
+  "RColorBrewer",   # Colour palettes
+  "knitr",          # Tables in Quarto
+  "kableExtra"      # Styled tables
+))
+```
+
+## Load Libraries
+
+```{r load-libraries}
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
+library(readxl)
+library(patchwork)
+library(scales)
+library(RColorBrewer)
+library(knitr)
+library(kableExtra)
+
+theme_set(theme_minimal(base_size = 12))
+set.seed(42)
+```
+
+
+```{r setup}
+#| include: false
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
+library(readxl)
+library(janitor)
+
+# NOTE: Update this path to your local file location
+data_file <- "Enque_te_d_analyse_des_Re_seaux_Sociaux_-_Social_Network_Analysis_Survey_-_combined_Mar252026-_deidentified.xlsx"
+```
+
+
+```{r data-prep}
+#| include: false
+
+# Read and clean data - you may need to adjust column references
+# The following uses the pre-cleaned CSVs from the Python pipeline.
+# Alternatively, you can read the raw xlsx and replicate the cleaning in R.
+
+# If using the pre-cleaned files:
+respondents <- read_csv("respondents_final.csv")
+edges <- read_csv("edges_final.csv")
+```
+
+## Two-Mode Network: Respondents and Issue Areas
+
+```{r bipartite-network}
+#| fig-cap: "Two-mode bipartite network. Circle nodes represent respondents; square nodes represent issue areas."
+
+# Build bipartite graph
+bip_edges <- respondents |>
+  filter(!is.na(issue_category), issue_category != "Unknown") |>
+  separate_rows(issue_category, sep = ";") |>
+  select(resp_id, issue_category) |>
+  filter(issue_category != "Unknown", nchar(issue_category) > 0)
+
+bip_graph <- graph_from_data_frame(bip_edges, directed = FALSE)
+V(bip_graph)$type <- V(bip_graph)$name %in% unique(bip_edges$issue_category)
+
+as_tbl_graph(bip_graph) |>
+  ggraph(layout = "fr") +
+  geom_edge_link(alpha = 0.08, colour = "#666666") +
+  geom_node_point(aes(shape = type, size = centrality_degree(),
+                      colour = type), alpha = 0.7) +
+  geom_node_text(aes(label = ifelse(type, name, NA)),
+                 size = 3, fontface = "bold", repel = TRUE) +
+  scale_shape_manual(values = c(16, 15),
+                     labels = c("Respondent", "Issue Area")) +
+  scale_colour_manual(values = c("#457B9D", "#E63946"),
+                      labels = c("Respondent", "Issue Area")) +
+  scale_size_continuous(range = c(2, 12)) +
+  theme_void() +
+  labs(title = "Bipartite Network: Respondents and Disability Rights Issue Areas") +
+  theme(legend.position = "bottom")
+```
+
+## One-Mode Projected Network
+
+```{r projected-network}
+#| fig-cap: "Respondents linked by shared collaboration partners."
+
+# Build respondent-org bipartite
+resp_org <- edges |>
+  filter(!is.na(partner_clean), partner_clean != "nan") |>
+  select(respondent, partner_clean)
+
+bip_ro <- graph_from_data_frame(resp_org, directed = FALSE)
+V(bip_ro)$type <- !(V(bip_ro)$name %in% unique(resp_org$respondent))
+
+# Project onto respondent mode
+proj <- bipartite_projection(bip_ro, which = "false")
+
+# Add attributes
+resp_lookup <- respondents |> select(resp_id, primary_connection, primary_issue)
+V(proj)$connection <- resp_lookup$primary_connection[match(V(proj)$name, resp_lookup$resp_id)]
+
+as_tbl_graph(proj) |>
+  ggraph(layout = "fr") +
+  geom_edge_link(aes(width = weight), alpha = 0.3, colour = "#999999") +
+  geom_node_point(aes(colour = connection, size = centrality_degree()), alpha = 0.8) +
+  scale_edge_width(range = c(0.5, 3)) +
+  theme_void() +
+  labs(title = "Projected Network: Respondents Linked by Shared Partners",
+       colour = "Connection Type") +
+  theme(legend.position = "bottom")
+```
+
+## Centrality Analysis
+
+```{r centrality}
+#| fig-cap: "Organization degree centrality — most frequently named collaboration partners."
+
+# Organization degree
+org_deg <- resp_org |>
+  count(partner_clean, sort = TRUE) |>
+  head(15)
+
+ggplot(org_deg, aes(x = reorder(partner_clean, n), y = n)) +
+  geom_col(fill = "#457B9D", alpha = 0.85) +
+  coord_flip() +
+  labs(x = NULL, y = "Degree (respondents naming this org)",
+       title = "Organization Degree Centrality") +
+  theme_minimal()
+```
+
+## Community Detection
+
+```{r communities}
+#| fig-cap: "Louvain community detection on the projected network."
+
+if (ecount(proj) > 0) {
+  comms <- cluster_louvain(proj, weights = E(proj)$weight)
+
+  as_tbl_graph(proj) |>
+    mutate(community = as.factor(membership(comms))) |>
+    ggraph(layout = "fr") +
+    geom_edge_link(alpha = 0.15, colour = "#BBBBBB") +
+    geom_node_point(aes(colour = community, size = centrality_degree()), alpha = 0.85) +
+    theme_void() +
+    labs(title = paste0("Community Detection (Louvain): ",
+                        length(unique(membership(comms))), " Communities"),
+         colour = "Community") +
+    theme(legend.position = "bottom")
+}
+```
+
+## Degree Distributions
+
+```{r distributions}
+#| fig-cap: "Degree distributions and collaboration frequency."
+#| fig-width: 16
+#| fig-height: 5
+
+p1 <- resp_org |>
+  count(partner_clean) |>
+  ggplot(aes(x = n)) +
+  geom_histogram(binwidth = 1, fill = "#457B9D", alpha = 0.8, colour = "white") +
+  labs(x = "Degree", y = "Count", title = "Organization Degree Distribution") +
+  theme_minimal()
+
+freq_data <- edges |>
+  filter(freq_clean != "Unknown") |>
+  count(freq_clean)
+
+p2 <- ggplot(freq_data, aes(x = freq_clean, y = n, fill = freq_clean)) +
+  geom_col(alpha = 0.85) +
+  scale_fill_manual(values = c("Regularly" = "#E63946",
+                                "Occasionally" = "#E9C46A",
+                                "Seldom" = "#457B9D")) +
+  labs(x = NULL, y = "Count", title = "Collaboration Frequency") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+library(patchwork)
+p1 + p2
+```
+
+## Discussion and Implications
+
+The Canadian disability rights community operates as a **highly decentralized network**. Collaboration is predominantly local and issue-specific rather than nationally integrated. A small number of national organizations serve as critical connectors whose capacity to convene and bridge across issue silos is disproportionately important to overall network cohesion.
