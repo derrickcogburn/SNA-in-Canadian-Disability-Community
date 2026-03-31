@@ -1,7 +1,7 @@
 ---
 title: "Social Network Analysis of the Canadian Disability Rights Community"
 subtitle: "Mapping Collaboration Networks and Key Actors in Disability Rights Advocacy"
-author: "Dr. Derrick L. Cogburn"
+author: "Dr. Derrick Cogburn"
 date: today
 format:
   pdf:
